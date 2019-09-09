@@ -18,7 +18,7 @@ namespace SignalRSandbox.Web.Controllers
         [HttpPost("allfish")]
         public async Task<IActionResult> AllFish()
         {
-            await _hub.Clients.All.SendAsync("fishCaught", "its a red one");
+            await _hub.Clients.All.SendAsync("fishCaught", "its a blue and red one");
             return Ok();
         }
 
