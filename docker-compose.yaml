@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  signalrscaleoutnode1:
+    image: signalrscaleout
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 7066:5000
+  signalrscaleoutnode2:
+    image: signalrscaleout
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 7067:5000
