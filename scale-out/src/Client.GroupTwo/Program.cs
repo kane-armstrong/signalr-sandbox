@@ -1,37 +1,58 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
-var configuration = new ConfigurationBuilder().AddEnvironmentVariables().AddJsonFile("appsettings.json").Build();
-var connection = new HubConnectionBuilder()
-    .WithUrl(configuration.GetConnectionString("hub"))
-    .ConfigureLogging(logging => logging.AddConsole())
-    .Build();
+await Host.CreateDefaultBuilder(args)
+    .ConfigureServices((_, services) =>
+    {
+        var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").AddEnvironmentVariables().Build();
 
-await connection.StartAsync();
+        services.AddScoped(_ =>
+        {
+            return new HubConnectionBuilder()
+                .WithUrl(configuration.GetConnectionString("hub"))
+                .ConfigureLogging(logging => logging.AddConsole())
+                .Build();
+        });
 
-Console.WriteLine("Starting connection. Press any key to close.");
+        services.AddHostedService<HubListener>();
+    })
+    .RunConsoleAsync();
 
-var cts = new CancellationTokenSource();
-
-Console.CancelKeyPress += (_, args) =>
+public class HubListener : IHostedService
 {
-    args.Cancel = true;
-    cts.Cancel();
-};
+    private const string Group = "two";
+    private readonly HubConnection _hubConnection;
+    private readonly ILogger<HubListener> _logger;
 
-connection.Closed += e =>
-{
-    Console.WriteLine("Connection closed with error: {0}", e);
-    cts.Cancel();
-    return Task.CompletedTask;
-};
+    public HubListener(HubConnection hubConnection, ILogger<HubListener> logger)
+    {
+        _hubConnection = hubConnection;
+        _logger = logger;
+    }
 
-connection.On("greet", (string message) => Console.WriteLine($"Greeting received: {message}"));
+    public async Task StartAsync(CancellationToken cancellationToken)
+    {
+        await _hubConnection.StartAsync(cancellationToken);
 
-await connection.InvokeCoreAsync("joinGroup", new object[] { "two" }, cts.Token);
+        _hubConnection.Closed += e =>
+        {
+            _logger.LogDebug("Connection closed with error: {0}", e);
+            return Task.CompletedTask;
+        };
 
-Console.ReadKey();
+        _hubConnection.On("greet", (string message) => Console.WriteLine($"Greeting received: {message}"));
+
+        await _hubConnection.InvokeCoreAsync("joinGroup", new object[] { Group }, cancellationToken);
+    }
+
+    public async Task StopAsync(CancellationToken cancellationToken)
+    {
+        await _hubConnection.DisposeAsync();
+    }
+}

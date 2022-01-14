@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddEnvironmentVariables().AddJsonFile("appsettings.json");
+builder.Configuration.AddJsonFile("appsettings.json").AddEnvironmentVariables();
 builder.Services.AddSignalR().AddRedis(builder.Configuration.GetConnectionString("redis"));
 builder.Services.AddMvcCore();
 

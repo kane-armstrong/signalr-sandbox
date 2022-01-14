@@ -1,0 +1,30 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  hub:
+    build:
+      context: .
+      dockerfile: Dockerfile.Hub
+    ports:
+      - "5987:5987"
+    environment:
+      ASPNETCORE_URLS: http://+:5987
+      CONNECTIONSTRINGS__REDIS: redis
+    depends_on: [ "redis" ]
+  clientone:
+    build:
+      context: .
+      dockerfile: Dockerfile.ClientOne
+    depends_on: ["hub"]
+    environment:
+      CONNECTIONSTRINGS__HUB: http://hub:5987/greetings
+  clienttwo:
+    build:
+      context: .
+      dockerfile: Dockerfile.ClientTwo
+    depends_on: ["hub"]
+    environment:
+      CONNECTIONSTRINGS__HUB: http://hub:5987/greetings
