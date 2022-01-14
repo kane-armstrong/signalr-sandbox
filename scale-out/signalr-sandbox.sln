@@ -6,17 +6,14 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{94940107-8BDD-492C-B0F9-425805916F48}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
-		Dockerfile.ClientOne = Dockerfile.ClientOne
-		Dockerfile.ClientTwo = Dockerfile.ClientTwo
+		Dockerfile.Client = Dockerfile.Client
 		Dockerfile.Hub = Dockerfile.Hub
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D7614499-5CE3-4228-B952-ABD7E3E26372}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.GroupOne", "src\Client.GroupOne\Client.GroupOne.csproj", "{D3E46FAE-4165-4431-AE7C-BF46F6D459B4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.GroupTwo", "src\Client.GroupTwo\Client.GroupTwo.csproj", "{DCD2125B-08C4-45F1-97C3-65818B273B33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "src\Client\Client.csproj", "{D3E46FAE-4165-4431-AE7C-BF46F6D459B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scale-out", "scale-out", "{63FDEE25-6861-4410-B16D-5BAF41677D20}"
 EndProject
@@ -44,18 +41,6 @@ Global
 		{D3E46FAE-4165-4431-AE7C-BF46F6D459B4}.Release|x64.Build.0 = Release|Any CPU
 		{D3E46FAE-4165-4431-AE7C-BF46F6D459B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{D3E46FAE-4165-4431-AE7C-BF46F6D459B4}.Release|x86.Build.0 = Release|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Debug|x64.Build.0 = Debug|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Debug|x86.Build.0 = Debug|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Release|x64.ActiveCfg = Release|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Release|x64.Build.0 = Release|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Release|x86.ActiveCfg = Release|Any CPU
-		{DCD2125B-08C4-45F1-97C3-65818B273B33}.Release|x86.Build.0 = Release|Any CPU
 		{FC3A51F8-C890-4F93-A543-C328758F6AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FC3A51F8-C890-4F93-A543-C328758F6AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC3A51F8-C890-4F93-A543-C328758F6AE0}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -74,7 +59,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D3E46FAE-4165-4431-AE7C-BF46F6D459B4} = {63FDEE25-6861-4410-B16D-5BAF41677D20}
-		{DCD2125B-08C4-45F1-97C3-65818B273B33} = {63FDEE25-6861-4410-B16D-5BAF41677D20}
 		{63FDEE25-6861-4410-B16D-5BAF41677D20} = {D7614499-5CE3-4228-B952-ABD7E3E26372}
 		{FC3A51F8-C890-4F93-A543-C328758F6AE0} = {63FDEE25-6861-4410-B16D-5BAF41677D20}
 	EndGlobalSection

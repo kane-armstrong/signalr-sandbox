@@ -17,14 +17,16 @@ services:
   clientone:
     build:
       context: .
-      dockerfile: Dockerfile.ClientOne
+      dockerfile: Dockerfile.Client
     depends_on: ["hub"]
     environment:
       CONNECTIONSTRINGS__HUB: http://hub:5987/greetings
+      GROUP__NAME: one
   clienttwo:
     build:
       context: .
-      dockerfile: Dockerfile.ClientTwo
+      dockerfile: Dockerfile.Client
     depends_on: ["hub"]
     environment:
       CONNECTIONSTRINGS__HUB: http://hub:5987/greetings
+      GROUP__NAME: two
