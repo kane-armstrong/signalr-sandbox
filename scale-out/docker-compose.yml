@@ -30,3 +30,10 @@ services:
     environment:
       CONNECTIONSTRINGS__HUB: http://hub:5987/greetings
       GROUP__NAME: two
+  publisher:
+    build:
+      context: .
+      dockerfile: Dockerfile.Publisher
+    depends_on: ["hub"]
+    environment:
+      CONNECTIONSTRINGS__HUB: http://hub:5987/

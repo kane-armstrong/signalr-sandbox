@@ -25,7 +25,7 @@ app.MapPost("greet/all", async (IHubContext<GreetingsHub> hub) =>
     return Results.NoContent();
 });
 
-app.MapPost("greet/{group}", async (IHubContext<GreetingsHub> hub, string group) =>
+app.MapPost("greet/group/{group}", async (IHubContext<GreetingsHub> hub, string group) =>
 {
     await hub.Clients.Group(group).SendAsync("greet", $"hello {group}");
     return Results.NoContent();
