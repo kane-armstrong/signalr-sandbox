@@ -47,3 +47,12 @@ services:
     depends_on: ["hub2"]
     environment:
       CONNECTIONSTRINGS__HUB: http://hub2:5988/
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.Tests
+    depends_on: ["hub1", "hub2"]
+    environment:
+      CONNECTIONSTRINGS__HUB1: http://hub1:5987/greetings
+      CONNECTIONSTRINGS__HUB2: http://hub2:5988/greetings
+      CONNECTIONSTRINGS__HUB1BASEURL: http://hub1:5987

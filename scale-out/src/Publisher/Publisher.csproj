@@ -25,4 +25,8 @@
       <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Hub.Client\Hub.Client.csproj" />
+    </ItemGroup>
+
 </Project>
